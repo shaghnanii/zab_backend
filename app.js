@@ -15,12 +15,12 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/", authentication);
+app.use("/api", authentication);
 
 // Plug in the JWT strategy as a middleware so only verified users can access this route.
-app.use("/api", passport.authenticate("jwt", { session: false }), secureRoute);
-
-app.use("/users", passport.authenticate("jwt", { session: false }), users);
+// app.use("/api", passport.authenticate("jwt", { session: false }), secureRoute);
+//
+// app.use("/users", passport.authenticate("jwt", { session: false }), users);
 
 // Handle errors. for api
 app.use(function (err, req, res, next) {

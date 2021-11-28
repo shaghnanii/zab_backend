@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.DATE,
     marks: DataTypes.INTEGER,
     total: DataTypes.INTEGER,
-    level: DataTypes.ENUM,
+    level: DataTypes.ENUM(['1', '2']),
     fyp_id: DataTypes.INTEGER
   }, {
     sequelize,

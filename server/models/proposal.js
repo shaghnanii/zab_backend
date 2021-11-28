@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Proposal.init({
     title: DataTypes.STRING,
     desc: DataTypes.TEXT,
-    type: DataTypes.ENUM,
-    level: DataTypes.ENUM,
+    type: DataTypes.ENUM(['Web', 'Android', 'IOS', 'Web/Mobile', 'IOS/Android', 'Machine Learning', 'Unity', 'Game']),
+    level: DataTypes.ENUM(['1', '2']),
     fyp_id: DataTypes.INTEGER
   }, {
     sequelize,

@@ -33,8 +33,10 @@ passport.use(
             passwordField: 'password'
         },
         async (email, password, done) => {
+            console.log("inside jwt token class.. ********************************** ")
             models.User.findOne({ where: { email: email } })
                 .then(data => {
+                    console.log("inside : data ********************************** ", data)
                     if (!data) {
                         return done(null, false, { message: 'User not found' });
                     }

@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const router = express.Router();
-const models = require('../server/models/index')
+const models = require('../../server/models/index')
 
 router.post(
     '/signup',
@@ -28,7 +28,10 @@ router.post(
                 try {
                     if (err || !user) {
                         const error = new Error('An error occurred.');
-                        res.json({'message': 'The provided email is not registered. Please try with a registered email.', 'status': '404'});
+                        console.log('error', err)
+                        console.log('usesr', user)
+                        console.log('usesr', info)
+                        return next(error);
                     }
                     req.login(
                         user,
@@ -37,11 +40,11 @@ router.post(
                             if (error) return next(error);
                             const body = { id: user.id, email: user.email, role_id: user.role_id };
                             const token = jwt.sign({ user: body }, 'ZAB_FYP_PORTAL_TOP_SECRET_API_TOKEN_KEY', { expiresIn: '24h' });
-                            res.json({ token });
+                            res.status(200).json({ token });
                         }
                     );
                 } catch (error) {
-                    res.json({'message': 'No user found', 'status': '404'});
+                    return next(error);
                 }
             }
         )(req, res, next);

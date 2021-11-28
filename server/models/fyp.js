@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   Fyp.init({
     name: DataTypes.STRING,
-    type: DataTypes.ENUM,
-    level: DataTypes.ENUM,
+    type: DataTypes.ENUM(['Web', 'Android', 'IOS', 'Web/Mobile', 'IOS/Android', 'Machine Learning', 'Unity', 'Game']),
+    level: DataTypes.ENUM(['1', '2']),
     desc: DataTypes.TEXT,
     status: DataTypes.BOOLEAN,
     pannel_id: DataTypes.INTEGER
