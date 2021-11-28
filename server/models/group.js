@@ -16,7 +16,9 @@ module.exports = (sequelize, DataTypes) => {
   Group.init({
     name: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
-    supervisor_id: DataTypes.INTEGER
+    supervisor_id: DataTypes.INTEGER,
+    fyp_id: DataTypes.INTEGER,
+    pannel_id: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Group',

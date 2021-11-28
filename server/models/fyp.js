@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Fyp.init({
     name: DataTypes.STRING,
     type: DataTypes.ENUM,
-    level: DataTypes.INTEGER,
+    level: DataTypes.ENUM,
     desc: DataTypes.TEXT,
     status: DataTypes.BOOLEAN,
     pannel_id: DataTypes.INTEGER

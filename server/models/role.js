@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+// const models = require('./index');
 module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
     /**
@@ -18,6 +19,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Role',
+    timestamps: true,
   });
+
+  Role.associate = models => {
+    models.Role.hasOne(models.User, {
+      foreignKey: 'role_id'
+    })
+  }
+
   return Role;
 };

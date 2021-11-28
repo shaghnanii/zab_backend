@@ -15,15 +15,32 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       supervisor_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        isInt: true,
+        allowNull: true,
+        references: { model: "Supervisors", key: "id" }
+      },
+      fyp_id: {
+        type: Sequelize.INTEGER,
+        isInt: true,
+        allowNull: true,
+        references: { model: "Fyps", key: "id" }
+      },
+      pannel_id: {
+        type: Sequelize.INTEGER,
+        isInt: true,
+        allowNull: true,
+        references: { model: "Pannels", key: "id" }
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("NOW()"),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("NOW()"),
       }
     });
   },

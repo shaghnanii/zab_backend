@@ -23,19 +23,33 @@ module.exports = {
       is_active: {
         type: Sequelize.BOOLEAN
       },
+      image: {
+        type: Sequelize.STRING,
+      },
+      reset_code: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       role_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        isInt: true,
+        references: { model: "Roles", key: "id" }
       },
       department_id: {
         type: Sequelize.INTEGER,
+        isInt: true,
+        allowNull: true,
+        references: { model: "Departments", key: "id" }
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("NOW()"),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("NOW()"),
       }
     });
   },

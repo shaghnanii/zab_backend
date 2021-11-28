@@ -20,11 +20,20 @@ module.exports = (sequelize, DataTypes) => {
     reg_id: DataTypes.INTEGER,
     password_status: DataTypes.BOOLEAN,
     reset_code: DataTypes.STRING,
+    image: DataTypes.STRING,
     role_id: DataTypes.INTEGER,
     department_id: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'User',
+    timestamps: true,
   });
+
+  User.associate = models => {
+    models.User.belongsTo(models.Role, {
+      foreignKey: 'role_id',
+    });
+  }
+
   return User;
 };

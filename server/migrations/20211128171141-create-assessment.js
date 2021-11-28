@@ -18,18 +18,23 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       level: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM(['1', '2'])
       },
       fyp_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        isInt: true,
+        allowNull: true,
+        references: { model: "Fyps", key: "id" },
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("NOW()"),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("NOW()"),
       }
     });
   },
