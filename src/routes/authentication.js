@@ -21,33 +21,9 @@ router.post(
 
 router.post(
     '/login',
-    async (req, res, next) => {
-        passport.authenticate(
-            'login',
-            async (err, user, info) => {
-                try {
-                    if (err || !user) {
-                        const error = new Error('An error occurred.');
-                        console.log('error', err)
-                        console.log('usesr', user)
-                        console.log('usesr', info)
-                        return next(error);
-                    }
-                    req.login(
-                        user,
-                        { session: false },
-                        async (error) => {
-                            if (error) return next(error);
-                            const body = { id: user.id, email: user.email, role_id: user.role_id };
-                            const token = jwt.sign({ user: body }, 'ZAB_FYP_PORTAL_TOP_SECRET_API_TOKEN_KEY', { expiresIn: '24h' });
-                            res.status(200).json({ token });
-                        }
-                    );
-                } catch (error) {
-                    return next(error);
-                }
-            }
-        )(req, res, next);
+    (req, res) => {
+        // Authentication part here
+        res.json('here')
     }
 );
 
