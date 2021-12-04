@@ -9,16 +9,22 @@ class LoginController {
     login_user(req, res) {
         const email = req.body.email;
         const password = req.body.password;
-        models.User.findOne({where: {email: email}})
+        models.User.findOne(
+            {
+                where: {email: email},
+                include: models.Role
+            }
+        )
             .then(user => {
                 if (!user)
                     return res.status(404).json({
                         message: 'No user found with the provided email.'
                     });
-                const isValidPassword = bcrypt.compareSync(password, user.password)
-                console.log(user)
+                const isValidPassword = bcrypt.compareSync(password, user.password);
+                // console.log(user)
                 if (isValidPassword){
-                    const access_token = jwt.sign(user.dataValues, process.env.ACCESS_TOKEN_SCRET, { expiresIn: '10m'})
+                    // expiresIn: '10m' [in option provide this to make the token expire in 10 minutes]
+                    const access_token = jwt.sign(user.dataValues, process.env.ACCESS_TOKEN_SCRET)
                     return res.json({
                         access_token: access_token,
                         data: user

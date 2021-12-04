@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 class LogoutController {
     logout(req, res) {
-
+        res.status(200).json({message: "Successfully logout."})
     }
 }
 

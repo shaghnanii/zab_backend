@@ -33,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
     models.User.belongsTo(models.Role, {
       foreignKey: 'role_id',
     });
+
+    models.Student.hasOne(models.Student, {
+      foreignKey: 'user_id',
+    });
+
   }
 
   return User;
