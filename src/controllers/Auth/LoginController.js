@@ -31,7 +31,7 @@ class LoginController {
                     })
                 }
                 else {
-                    return res.status(401).json({
+                    return res.status(403).json({
                         message: 'Invalid password!. Please make sure you are using the correct password to login.'
                     });
                 }

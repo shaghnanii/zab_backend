@@ -31,13 +31,12 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-db.sequelize = sequelize;
+// db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 // we can also define association here
-// db.User.hasOne(db.Fyp, {
-//   foreignKey: 'studentId'
-// });
+// db.User.hasOne(db.Student);
+// db.Student.belongsTo(db.User, { foreignKey: 'userId'})
 // db.Fyp.belongsTo(db.User, {
 //   foreignKey: 'studentId'
 // });

@@ -26,5 +26,12 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Supervisor',
   });
+  Supervisor.associate = models => {
+    // relation with user
+    models.Supervisor.belongsTo(models.User, {
+      foreignKey: 'user_id'
+    })
+
+  }
   return Supervisor;
 };

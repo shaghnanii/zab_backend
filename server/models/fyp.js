@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   Fyp.init({
     name: DataTypes.STRING,
-    type: DataTypes.ENUM(['Web', 'Android', 'IOS', 'Web/Mobile', 'IOS/Android', 'Machine Learning', 'Unity', 'Game']),
+    type: DataTypes.ENUM(['web', 'android', 'ios', 'web-mobile', 'ios-android', 'machine-learning', 'unity', 'game']),
     level: DataTypes.ENUM(['1', '2']),
     desc: DataTypes.TEXT,
     status: DataTypes.BOOLEAN,
@@ -24,5 +24,9 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Fyp',
   });
+
+  Fyp.associate = models => {
+    // models.Fyp.
+  }
   return Fyp;
 };

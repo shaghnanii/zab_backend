@@ -34,10 +34,21 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'role_id',
     });
 
-    models.Student.hasOne(models.Student, {
-      foreignKey: 'user_id',
+    models.User.hasOne(models.Student, {
+      foreignKey: 'user_id'
     });
 
+    models.User.hasOne(models.Supervisor, {
+      foreignKey: 'user_id'
+    });
+
+    models.User.hasOne(models.Pm, {
+      foreignKey: 'user_id'
+    });
+
+    models.User.belongsTo(models.Department, {
+      foreignKey: 'department_id'
+    })
   }
 
   return User;

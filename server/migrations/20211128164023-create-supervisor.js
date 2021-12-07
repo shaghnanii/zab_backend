@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       dob: {
-        type: Sequelize.STRING
+        type: Sequelize.DATEONLY
       },
       majors: {
         type: Sequelize.STRING
@@ -33,7 +33,8 @@ module.exports = {
         type: Sequelize.INTEGER,
         isInt: true,
         allowNull: true,
-        references: { model: "Users", key: "id" }
+        references: { model: "Users", key: "id" },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

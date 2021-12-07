@@ -1,16 +1,16 @@
 const models = require( '../../../../server/models/index');
 const bcrypt = require("bcrypt");
 
-class StudentController {
+class SupervisorController {
 
     async index(req, res) {
         try {
-            let student = await models.Student.findAll({include: ['User']});
-            if (student.length !== 0) {
+            let supervisors = await models.Supervisor.findAll({include: ['User']});
+            if (supervisors.length !== 0) {
                 //data found
-                res.json({message: "User data", data: student})
+                res.json({message: "User data", data: supervisors})
             } else {
-                res.status(404).json({message: "No student found."})
+                res.status(404).json({message: "No supervisor found."})
             }
         } catch (err) {
             res.status(500).json({message: err.message})
@@ -18,26 +18,25 @@ class StudentController {
     }
     async show(req, res) {
         try {
-            let student = await models.Student.findByPk(req.params.id, {include: ['User']});
-            if (student) {
+            let supervisor = await models.Supervisor.findByPk(req.params.id, {include: ['User']});
+            if (supervisor) {
                 //data found
-                res.json({message: "User data", data: student})
+                res.json({message: "User data", data: supervisor})
             } else {
-                res.status(404).json({message: "No student found with the provided id."})
+                res.status(404).json({message: "No supervisor found with the provided id."})
             }
         } catch (err) {
             res.status(500).json({message: err.message})
         }
     }
     async store(req, res) {
-        let transaction;
         try {
             const salt = bcrypt.genSaltSync(parseInt(process.env.SECRET_SALT_ROUND_NUMBERS));
             req.body.password = bcrypt.hashSync(req.body.password, salt)
             req.body.password_status = 0;
             req.body.is_active = 1;
-            req.body.role_id = 4; // student id = 4
-            req.body.Student = req.body;
+            req.body.role_id = 3; // supervisor id = 3
+            req.body.Supervisor = req.body;
             // check for email existence in db
             let check_email = await models.User.findAll({where: {email: req.body.email}})
             // check for registration id existence in db
@@ -47,32 +46,28 @@ class StudentController {
                 res.status(409).json({message: "This email or registration id is already taken, please use a different email or registration id."})
             }
             else {
-                // transaction = await sequelize.transaction();
                 let user_data = await models.User.create(
                     req.body,
                     {
                         include: [{
-                            model: models.Student,
-                            as: 'Student'
+                            model: models.Supervisor,
+                            as: 'Supervisor'
                         }]
                     });
                 if (user_data) {
-                    // await transaction.commit();
                     res.status(200).json({message: 'User created successfully.', data: user_data})
                 } else {
-                    // await transaction.rollback();
                     res.status(409).json({message: 'Failed to create new user.'})
                 }
             }
         } catch (err) {
-            // if (transaction) await transaction.rollback();
-            res.status(500).json({message: err.message})
+            res.status(500).json({message: err})
         }
     }
     async update(req, res) {
         try {
-            let student = await models.Student.findByPk(req.params.id, { include: ['User']});
-            if(student) {
+            let supervisor = await models.Supervisor.findByPk(req.params.id, { include: ['User']});
+            if(supervisor) {
                 // const salt = bcrypt.genSaltSync(parseInt(process.env.SECRET_SALT_ROUND_NUMBERS));
                 // req.body.password = bcrypt.hashSync(req.body.password, salt)
                 req.body.User = req.body;
@@ -81,12 +76,12 @@ class StudentController {
                 //     reg_id: req.body.reg_id,
                 //     password_status: 1,
                 //     is_active: 1,
-                //     role_id: 1,
+                //     role_id: 3,
                 //     department_id: 1
                 // }
                 req.body.User = req.body
-                // console.log("user detqails: ", req.body)
-                let user = student.update(
+                // console.log("user request details: ", req.body)
+                let user = supervisor.update(
                     req.body,
                     {
                         include: [{
@@ -95,12 +90,12 @@ class StudentController {
                         }]
                     }
                 );
-                // student.save();
-                student.reload();
-                res.json({message: "User details updated successfully.", data: student})
+                // supervisor.save();
+                supervisor.reload();
+                res.json({message: "User details updated successfully.", data: supervisor})
             }
             else {
-                res.status(404).json({ message: "No student found with the provided id."})
+                res.status(404).json({ message: "No supervisor found with the provided id."})
             }
         }
         catch (err){
@@ -109,13 +104,13 @@ class StudentController {
     }
     async delete(req, res) {
         try {
-            let student = await models.Student.findByPk(req.params.id, {include: ['User']});
-            if (student) {
-                let user = await models.User.findByPk(student.User.id);
+            let supervisor = await models.Supervisor.findByPk(req.params.id, {include: ['User']});
+            if (supervisor) {
+                let user = await models.User.findByPk(supervisor.User.id);
                 user.destroy();
                 res.json({ message: "User deleted successfully." });
             } else {
-                res.status(404).json({message: "No student found with the provided id."})
+                res.status(404).json({message: "No supervisor found with the provided id."})
             }
         } catch (err) {
             res.status(500).json({message: err.message})
@@ -123,4 +118,4 @@ class StudentController {
     }
 }
 
-module.exports = StudentController;
+module.exports = SupervisorController;

@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       type: {
-        type: Sequelize.ENUM(['Web', 'Android', 'IOS', 'Web/Mobile', 'IOS/Android', 'Machine Learning', 'Unity', 'Game']),
+        type: Sequelize.ENUM(['web', 'android', 'ios', 'web-mobile', 'ios-android', 'machine-learning', 'unity', 'game']),
       },
       level: {
         type: Sequelize.ENUM(['1', '2'])

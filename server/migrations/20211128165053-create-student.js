@@ -24,16 +24,21 @@ module.exports = {
         type: Sequelize.STRING
       },
       dob: {
-        type: Sequelize.STRING
+        type: Sequelize.DATEONLY
       },
       majors: {
         type: Sequelize.STRING
+      },
+      batch: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       user_id: {
         type: Sequelize.INTEGER,
         isInt: true,
         allowNull: true,
-        references: { model: "Users", key: "id" }
+        references: { model: "Users", key: "id" },
+        onDelete: 'CASCADE'
       },
       group_id: {
         type: Sequelize.INTEGER,
