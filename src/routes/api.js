@@ -22,6 +22,11 @@ const admin_add_new_pm_validation = require('../Requests/Admin/Pms/AdminPmStoreR
 const admin_add_new_fyp_validation = require('../Requests/Admin/Fyps/AdminFypStoreRequest')
 const complete_profile_validation = require('../Requests/Profile/CompleteProfileRequest')
 
+
+// students validations
+const student_add_fyp_validation = require('../Requests/Student/Fyp/FypStoreRequest');
+
+
 // controllers
 const Login = require('../controllers/Auth/LoginController')
 const Register = require('../controllers/Auth/RegisterController')
@@ -40,6 +45,7 @@ const AdminFypController = require('../controllers/Admin/Fyps/FypController')
 
 // Student Controllers
 const StudentController = require('../controllers/Student/StudentController')
+const StudentFypController = require('../controllers/Student/FypController')
 
 // PM Controllers
 const PmController = require('../controllers/PM/PmController')
@@ -124,6 +130,12 @@ router.delete('/admin/fyps/:id', auth, check_admin, (new AdminFypController).del
  */
 
 router.get('/students', auth, check_student, (new StudentController).index)
+
+router.get('/fyps', auth, check_student, (new StudentFypController).index)
+router.get('/fyps/:id', auth, check_student, (new StudentFypController).show)
+router.post('/fyps', auth, check_student, student_add_fyp_validation.student_fyp_store_request, (new StudentFypController).store)
+router.put('/fyps', auth, check_student, (new StudentFypController).update)
+router.delete('/fyps', auth, check_student, (new StudentFypController).delete)
 
 /**
  *  -------------------------------------------------------------------------------------
