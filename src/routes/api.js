@@ -75,7 +75,7 @@ router.post('/auth/forgot', forgot_password_validation.forgot_password, (new For
 
 router.post('/auth/reset', reset_password_validation.reset_password, (new ForgotController).reset_password);
 
-router.get('/dropdown-data', (new DropdownController).dropdown_data);
+router.get('/dropdown-data', auth, (new DropdownController).dropdown_data);
 router.post('/dropdown-departments', (new DropdownController).dropdown_departments);
 
 /**

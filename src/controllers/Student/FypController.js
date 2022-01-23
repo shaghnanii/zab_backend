@@ -30,7 +30,13 @@ class FypController {
                     as: 'Group'
                 }});
             if (student_fyp){
-                res.json({message: 'Student fyp details', data: student_fyp});
+                if (student_fyp.Group){
+                    res.json({data: false})
+                }
+                else {
+                    res.json({data: true})
+                }
+                // res.json({message: 'Student fyp details', data: student_fyp});
             }
             else {
                 res.status(404).json({message: "No fyp details found with the provided id."});

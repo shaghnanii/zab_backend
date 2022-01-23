@@ -1,6 +1,7 @@
 const models = require( '../../server/models/index');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
+const { Op } = require("sequelize");
 
 
 class DropdownController {
@@ -8,11 +9,20 @@ class DropdownController {
         try {
             let campuses = await models.Campus.findAll();
             let departments = await models.Department.findAll();
+            let supervisors = await models.Supervisor.findAll();
+            let fyps = await models.Fyp.findAll();
+            let students = await models.Student.findAll({where: {user_id: { [Op.not]: req.user.id}}, include: {
+                model: models.User,
+                    as: 'User'
+                }});
             res.json({
                 message: "Dropdown data",
                 data: {
                     campuses: campuses,
-                    departments: departments
+                    departments: departments,
+                    supervisors: supervisors,
+                    fyps: fyps,
+                    students: students
                 }
             })
         }
