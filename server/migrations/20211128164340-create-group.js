@@ -26,6 +26,18 @@ module.exports = {
         allowNull: true,
         references: { model: "Fyps", key: "id" }
       },
+      student_one_id: {
+        type: Sequelize.INTEGER,
+        isInt: true,
+        allowNull: true,
+        references: { model: "Student", key: "id" }
+      },
+      student_two_id: {
+        type: Sequelize.INTEGER,
+        isInt: true,
+        allowNull: true,
+        references: { model: "Student", key: "id" }
+      },
       pannel_id: {
         type: Sequelize.INTEGER,
         isInt: true,

@@ -26,6 +26,8 @@ const complete_profile_validation = require('../Requests/Profile/CompleteProfile
 // students validations
 const student_add_fyp_validation = require('../Requests/Student/Fyp/FypStoreRequest');
 
+const student_create_group_validation = require('../Requests/Student/Group/GroupStoreRequest');
+
 
 // controllers
 const Login = require('../controllers/Auth/LoginController')
@@ -47,8 +49,11 @@ const AdminFypController = require('../controllers/Admin/Fyps/FypController')
 const StudentController = require('../controllers/Student/StudentController')
 const StudentFypController = require('../controllers/Student/FypController')
 
+const GroupController = require('../controllers/Student/GroupController')
+
 // PM Controllers
 const PmController = require('../controllers/PM/PmController')
+const PannelController = require('../controllers/PM/PannelController')
 
 // Supervisor Controllers
 const SupervisorController = require('../controllers/Supervisor/SupervisorController')
@@ -132,10 +137,15 @@ router.delete('/admin/fyps/:id', auth, check_admin, (new AdminFypController).del
 router.get('/students', auth, check_student, (new StudentController).index)
 
 router.get('/fyps', auth, check_student, (new StudentFypController).index)
+router.get('/student-fyp', auth, check_student, (new StudentFypController).check_student_fyp)
 router.get('/fyps/:id', auth, check_student, (new StudentFypController).show)
 router.post('/fyps', auth, check_student, student_add_fyp_validation.student_fyp_store_request, (new StudentFypController).store)
 router.put('/fyps', auth, check_student, (new StudentFypController).update)
 router.delete('/fyps', auth, check_student, (new StudentFypController).delete)
+
+
+router.get('/groups', auth, check_student, (new GroupController).index);
+router.post('/groups', auth, check_student, student_create_group_validation.student_create_group_request, (new GroupController).store);
 
 /**
  *  -------------------------------------------------------------------------------------
@@ -155,6 +165,7 @@ router.get('/supervisors', auth, check_supervisor, (new SupervisorController).in
  *  -------------------------------------------------------------------------------------
  */
 router.get('/pms', auth, check_pm, (new PmController).index)
+router.post('/pannels', auth, check_pm, (new PannelController).store)
 
 
 module.exports = router;

@@ -2,18 +2,15 @@ const models = require( '../../../server/models/index');
 class FypController {
     async index(req, res){
         try {
-            let student = await models.Student.findOne(
+            let student = await models.Fyp.findAll(
                 {
-                    where: {
-                        user_id: req.user.id,
-                    },
-                    include: {
-                        model: models.User,
-                        as: 'User',
-                        include: {
-                            model: models.Department
-                        }
-                    }
+                    // include: {
+                    //     model: models.User,
+                    //     as: 'User',
+                    //     include: {
+                    //         model: models.Department
+                    //     }
+                    // }
                 });
             if (student) {
                 //data found
@@ -22,6 +19,24 @@ class FypController {
                 res.status(404).json({message: "No student found with the provided id."})
             }
         } catch (err) {
+            res.status(500).json({message: err.message})
+        }
+    }
+
+    async check_student_fyp(req, res) {
+        try {
+            let student_fyp = await models.Student.findOne({where: {user_id: req.user.id}, include: {
+                    model: models.Group,
+                    as: 'Group'
+                }});
+            if (student_fyp){
+                res.json({message: 'Student fyp details', data: student_fyp});
+            }
+            else {
+                res.status(404).json({message: "No fyp details found with the provided id."});
+            }
+        }
+        catch (err){
             res.status(500).json({message: err.message})
         }
     }
@@ -41,7 +56,9 @@ class FypController {
             }
             else {
                 let fyp_data = await models.Fyp.create(req.body);
-
+                req.body.fyp_id = fyp_data.id;
+                req.body.title = req.body.name;
+                let proposal = await models.Proposal.create(req.body);
                 if (fyp_data) {
                     res.status(200).json({message: 'Fyp created successfully.', data: fyp_data})
                 } else {

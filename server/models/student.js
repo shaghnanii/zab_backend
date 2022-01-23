@@ -34,6 +34,9 @@ module.exports = (sequelize, DataTypes) => {
     models.Student.belongsTo(models.User, {
       foreignKey: 'user_id',
     });
+    models.Student.belongsTo(models.Group, {
+      foreignKey: 'group_id',
+    });
   }
   return Student;
 };

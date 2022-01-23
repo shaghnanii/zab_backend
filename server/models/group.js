@@ -23,5 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Group',
   });
+
+  Group.associate = models => {
+    models.Group.hasOne(models.Student, {
+      foreignKey: 'group_id',
+    })
+  }
   return Group;
 };
