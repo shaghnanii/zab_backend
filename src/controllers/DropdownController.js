@@ -11,10 +11,17 @@ class DropdownController {
             let departments = await models.Department.findAll();
             let supervisors = await models.Supervisor.findAll();
             let fyps = await models.Fyp.findAll();
-            let students = await models.Student.findAll({where: {user_id: { [Op.not]: req.user.id}}, include: {
-                model: models.User,
-                    as: 'User'
-                }});
+            let students = await models.Student.findAll(
+                {
+                    where: {
+                        user_id: { [Op.not]: req.user.id},
+                        group_id: null,
+                    },
+                    include: {
+                        model: models.User,
+                            as: 'User'
+                        }
+                });
             res.json({
                 message: "Dropdown data",
                 data: {

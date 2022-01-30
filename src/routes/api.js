@@ -50,6 +50,7 @@ const StudentController = require('../controllers/Student/StudentController')
 const StudentFypController = require('../controllers/Student/FypController')
 
 const StudentCommentController = require('../controllers/Student/StudentComment')
+const StudentResultController = require('../controllers/Student/ResultController')
 
 const GroupController = require('../controllers/Student/GroupController')
 
@@ -139,6 +140,7 @@ router.delete('/admin/fyps/:id', auth, check_admin, (new AdminFypController).del
 router.get('/students', auth, check_student, (new StudentController).index)
 
 router.get('/student-comments', auth, check_student, (new StudentCommentController).index)
+router.get('/student-results', auth, check_student, (new StudentResultController()).index)
 
 
 router.get('/fyps', auth, check_student, (new StudentFypController).index)
