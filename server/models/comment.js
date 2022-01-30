@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Attendance extends Model {
+  class Comment extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,22 +13,18 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Attendance.init({
-    date: DataTypes.DATE,
-    status: DataTypes.ENUM(['Absent', 'Present', 'Leave']),
-    level: DataTypes.ENUM(['1', '2']),
-    fyp_id: DataTypes.INTEGER
+  Comment.init({
+    comment: DataTypes.STRING,
+    attendance_id: DataTypes.INTEGER,
   }, {
     sequelize,
-    modelName: 'Attendance',
+    modelName: 'Comment',
   });
-  Attendance.associate = models => {
-    models.Attendance.belongsTo(models.Fyp, {
-      foreignKey: 'fyp_id'
-    })
-    models.Attendance.hasOne(models.Comment, {
+  Comment.associate = models => {
+    models.Comment.belongsTo(models.Attendance, {
       foreignKey: 'attendance_id'
     })
   }
-  return Attendance;
+
+  return Comment;
 };

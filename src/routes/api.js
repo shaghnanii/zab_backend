@@ -49,6 +49,8 @@ const AdminFypController = require('../controllers/Admin/Fyps/FypController')
 const StudentController = require('../controllers/Student/StudentController')
 const StudentFypController = require('../controllers/Student/FypController')
 
+const StudentCommentController = require('../controllers/Student/StudentComment')
+
 const GroupController = require('../controllers/Student/GroupController')
 
 // PM Controllers
@@ -135,6 +137,9 @@ router.delete('/admin/fyps/:id', auth, check_admin, (new AdminFypController).del
  */
 
 router.get('/students', auth, check_student, (new StudentController).index)
+
+router.get('/student-comments', auth, check_student, (new StudentCommentController).index)
+
 
 router.get('/fyps', auth, check_student, (new StudentFypController).index)
 router.get('/student-fyp', auth, check_student, (new StudentFypController).check_student_fyp)
