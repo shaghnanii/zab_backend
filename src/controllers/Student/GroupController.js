@@ -1,15 +1,43 @@
 const models = require( '../../../server/models/index');
 class GroupController {
+    async active_groups(req, res) {
+        try {
+            let groups = await models.Group.findAll(
+                {
+                    where: {status: true},
+                    include: [
+                        {
+                            model: models.Student,
+                            as: 'Students',
+                        },
+                        {
+                            model: models.Fyp,
+                            as: 'Fyp',
+                        }
+                    ]
+                }
+            )
+
+            if (groups){
+                res.json({message: 'Group data', data: groups})
+            }
+            else {
+                res.status(404).json({message: "No group data found."});
+            }
+        } catch (err) {
+            res.status(500).json({message: err.message})
+        }
+    }
     async index(req, res) {
         try {
-            let groups = await models.Student.findOne(
+            let groups = await models.Group.findAll(
                 {
-                    where: {user_id: req.user.id},
                     include: {
-                        model: models.Group,
-                        as: 'Group'
+                        model: models.Student,
+                        as: 'Students'
                     }
-                });
+                }
+            )
 
             if (groups){
                 res.json({message: 'Group data', data: groups})
@@ -23,11 +51,36 @@ class GroupController {
     }
 
     async show(req, res) {
+        try {
+            let group = await models.Group.findByPk(req.params.id,
+                {
+                    include: [
+                        {
+                            model: models.Student,
+                            as: 'Students',
+                        },
+                        {
+                            model: models.Fyp,
+                            as: 'Fyp',
+                        }
+                    ]
+                }
+            )
 
+            if (group){
+                res.json({message: 'Group data', data: group})
+            }
+            else {
+                res.status(404).json({message: "No group data found."});
+            }
+        } catch (err) {
+            res.status(500).json({message: err.message})
+        }
     }
 
     async store(req, res) {
         try {
+            req.body.status = 1;
             let group = await models.Group.create(req.body);
             if (group) {
                 if (req.user.id == req.body.partner_id){

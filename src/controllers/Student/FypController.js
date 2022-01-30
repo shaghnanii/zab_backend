@@ -31,10 +31,10 @@ class FypController {
                 }});
             if (student_fyp){
                 if (student_fyp.Group){
-                    res.json({data: false})
+                    res.json({check: true, group: student_fyp.Group.id})
                 }
                 else {
-                    res.json({data: true})
+                    res.json({check: false})
                 }
                 // res.json({message: 'Student fyp details', data: student_fyp});
             }

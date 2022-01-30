@@ -40,6 +40,12 @@ module.exports = {
         references: { model: "Users", key: "id" },
         onDelete: 'CASCADE'
       },
+      group_id: {
+        type: Sequelize.INTEGER,
+        isInt: true,
+        allowNull: true,
+        references: { model: "Groups", key: "id" }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

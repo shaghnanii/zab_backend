@@ -26,7 +26,9 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Fyp.associate = models => {
-    // models.Fyp.
+    models.Fyp.hasOne(models.Group, {
+      foreignKey: 'fyp_id',
+    })
   }
   return Fyp;
 };

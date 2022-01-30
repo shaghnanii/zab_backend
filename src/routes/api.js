@@ -145,6 +145,8 @@ router.delete('/fyps', auth, check_student, (new StudentFypController).delete)
 
 
 router.get('/groups', auth, check_student, (new GroupController).index);
+router.get('/active-groups', auth, check_student, (new GroupController).active_groups);
+router.get('/groups/:id', auth, check_student, (new GroupController).show);
 router.post('/groups', auth, check_student, student_create_group_validation.student_create_group_request, (new GroupController).store);
 
 /**
