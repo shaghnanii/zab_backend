@@ -23,5 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Result',
   });
+  Result.associate = models => {
+    models.Result.belongsTo(models.Fyp, {
+      foreignKey: 'fyp_id'
+    })
+  }
   return Result;
 };

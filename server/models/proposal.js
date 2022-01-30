@@ -23,5 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Proposal',
   });
+  Proposal.associate = models => {
+    models.Proposal.belongsTo(models.Fyp, {
+      foreignKey: 'fyp_id'
+    })
+  }
   return Proposal;
 };

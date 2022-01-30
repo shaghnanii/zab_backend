@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
     models.Supervisor.belongsTo(models.User, {
       foreignKey: 'user_id'
     })
+    models.Supervisor.hasMany(models.Group, {
+      foreignKey: 'supervisor_id'
+    })
+
 
   }
   return Supervisor;

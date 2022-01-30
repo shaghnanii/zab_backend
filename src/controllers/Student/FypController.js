@@ -1,16 +1,35 @@
 const models = require( '../../../server/models/index');
+
 class FypController {
     async index(req, res){
         try {
+            // let user = await models.User.findByPk(req.user.id, {
+            //     include: {
+            //         model: models.Student,
+            //         as: 'Student',
+            //         include: {
+            //             model: models.Group,
+            //             as: 'Group',
+            //             include: [
+            //                 {
+            //                     model: models.Fyp,
+            //                     as: 'Fyp'
+            //                 },
+            //                 {
+            //                     model: models.Supervisor,
+            //                     as: 'Supervisor'
+            //                 }
+            //             ]
+            //         }
+            //     }
+            // });
+            // res.json(user);
             let student = await models.Fyp.findAll(
                 {
-                    // include: {
-                    //     model: models.User,
-                    //     as: 'User',
-                    //     include: {
-                    //         model: models.Department
-                    //     }
-                    // }
+                    include: {
+                        model: models.Group,
+                        as: 'Group',
+                    }
                 });
             if (student) {
                 //data found
@@ -48,7 +67,27 @@ class FypController {
     }
 
     async show(req, res){
-
+        try {
+            let project = await models.Fyp.findByPk(req.params.id,
+                {
+                    include: {
+                        model: models.Group,
+                        as: 'Group',
+                        include: {
+                            model: models.Student,
+                            as: 'Students'
+                        }
+                    }
+                });
+            if (project) {
+                //data found
+                res.json({message: "Student data", data: project})
+            } else {
+                res.status(404).json({message: "No project with the provided id."})
+            }
+        } catch (err) {
+            res.status(500).json({message: err.message})
+        }
     }
 
     async store(req, res){

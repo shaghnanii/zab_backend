@@ -31,6 +31,12 @@ module.exports = (sequelize, DataTypes) => {
     models.Group.belongsTo(models.Fyp, {
       foreignKey: 'fyp_id',
     })
+    models.Group.belongsTo(models.Supervisor, {
+      foreignKey: 'supervisor_id',
+    })
+    models.Group.belongsTo(models.Pannel, {
+      foreignKey: 'pannel_id',
+    })
   }
   return Group;
 };

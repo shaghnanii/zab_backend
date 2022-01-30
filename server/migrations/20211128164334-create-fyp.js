@@ -23,12 +23,6 @@ module.exports = {
       status: {
         type: Sequelize.BOOLEAN
       },
-      pannel_id: {
-        type: Sequelize.INTEGER,
-        isInt: true,
-        allowNull: true,
-        references: { model: "Pannels", key: "id" }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

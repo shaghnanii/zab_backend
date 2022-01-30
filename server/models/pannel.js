@@ -20,5 +20,14 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Pannel',
   });
+  Pannel.associate = models => {
+    models.Pannel.belongsTo(models.Pm, {
+      foreignKey: 'pm_id'
+    })
+
+    models.Pannel.hasMany(models.Group, {
+      foreignKey: 'pannel_id'
+    })
+  }
   return Pannel;
 };

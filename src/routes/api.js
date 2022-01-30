@@ -157,7 +157,8 @@ router.post('/groups', auth, check_student, student_create_group_validation.stud
  *  -------------------------------------------------------------------------------------
  */
 
-router.get('/supervisors', auth, check_supervisor, (new SupervisorController).index)
+router.get('/supervisors', auth, (new SupervisorController).index)
+router.get('/supervisors', auth, check_supervisor, (new SupervisorController).show)
 
 /**
  *  -------------------------------------------------------------------------------------

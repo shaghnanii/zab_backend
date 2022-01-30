@@ -30,6 +30,9 @@ module.exports = (sequelize, DataTypes) => {
     models.Pm.belongsTo(models.User, {
       foreignKey: 'user_id'
     })
+    models.Pm.belongsTo(models.Pannel, {
+      foreignKey: 'pm_id'
+    })
   }
   return Pm;
 };

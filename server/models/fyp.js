@@ -19,13 +19,24 @@ module.exports = (sequelize, DataTypes) => {
     level: DataTypes.ENUM(['1', '2']),
     desc: DataTypes.TEXT,
     status: DataTypes.BOOLEAN,
-    pannel_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Fyp',
   });
 
   Fyp.associate = models => {
+    models.Fyp.hasMany(models.Attendance, {
+      foreignKey: 'fyp_id',
+    })
+    models.Fyp.hasOne(models.Proposal, {
+      foreignKey: 'fyp_id',
+    })
+    models.Fyp.hasMany(models.Assessment, {
+      foreignKey: 'fyp_id',
+    })
+    models.Fyp.hasMany(models.Result, {
+      foreignKey: 'fyp_id',
+    })
     models.Fyp.hasOne(models.Group, {
       foreignKey: 'fyp_id',
     })

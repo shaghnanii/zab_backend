@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
     models.Department.hasOne(models.User, {
       foreignKey: 'department_id'
     })
+
+    models.Department.belongsTo(models.Campus, {
+      foreignKey: 'campus_id'
+    })
   }
   return Department;
 };
