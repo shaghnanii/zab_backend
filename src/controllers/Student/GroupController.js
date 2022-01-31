@@ -81,6 +81,7 @@ class GroupController {
     async store(req, res) {
         try {
             req.body.status = 1;
+            req.body.level = 1;
             let group = await models.Group.create(req.body);
             if (group) {
                 if (req.user.id == req.body.partner_id){

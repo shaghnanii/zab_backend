@@ -14,6 +14,9 @@ module.exports = {
       status: {
         type: Sequelize.BOOLEAN
       },
+      level: {
+        type: Sequelize.ENUM(['1', '2'])
+      },
       supervisor_id: {
         type: Sequelize.INTEGER,
         isInt: true,

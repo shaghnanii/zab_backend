@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Group.init({
     name: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
+    level: DataTypes.ENUM(['1', '2']),
     supervisor_id: DataTypes.INTEGER,
     fyp_id: DataTypes.INTEGER,
     pannel_id: DataTypes.INTEGER,

@@ -165,6 +165,7 @@ router.post('/groups', auth, check_student, student_create_group_validation.stud
  */
 
 router.get('/supervisors', auth, (new SupervisorController).index)
+router.get('/supervisors/:id', auth, (new SupervisorController).show)
 router.get('/supervisors', auth, check_supervisor, (new SupervisorController).show)
 
 /**
@@ -175,6 +176,12 @@ router.get('/supervisors', auth, check_supervisor, (new SupervisorController).sh
  *  -------------------------------------------------------------------------------------
  */
 router.get('/pms', auth, check_pm, (new PmController).index)
+
+router.get('/pm-fyp-one', auth, check_pm, (new PmController).fyp_one)
+router.get('/pm-fyp-two', auth, check_pm, (new PmController).fyp_two)
+router.get('/pms-part-one-attendances-and-comments', auth, check_pm, (new PmController).one_comments)
+router.get('/pms-part-two-attendances-and-comments', auth, check_pm, (new PmController).two_comments)
+
 router.post('/pannels', auth, check_pm, (new PannelController).store)
 
 
