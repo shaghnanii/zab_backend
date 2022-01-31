@@ -24,8 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Assessment',
   });
   Assessment.associate = models => {
-    models.Assessment.belongsTo(models.Fyp, {
-      foreignKey: 'fyp_id'
+    models.Assessment.belongsTo(models.Pm, {
+      foreignKey: 'pm_id'
+    })
+    models.Assessment.belongsTo(models.Group, {
+      foreignKey: 'group_id'
     })
   }
   return Assessment;

@@ -34,6 +34,9 @@ module.exports = (sequelize, DataTypes) => {
     models.Supervisor.hasMany(models.Group, {
       foreignKey: 'supervisor_id'
     })
+    models.Supervisor.belongsTo(models.Pannel, {
+      foreignKey: 'pannel_id'
+    })
 
 
   }

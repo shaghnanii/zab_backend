@@ -33,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
     models.Pm.hasMany(models.Pannel, {
       foreignKey: 'pm_id'
     })
+    models.Pm.hasMany(models.Assessment, {
+      foreignKey: 'pm_id'
+    })
   }
   return Pm;
 };

@@ -31,9 +31,6 @@ module.exports = (sequelize, DataTypes) => {
     models.Fyp.hasOne(models.Proposal, {
       foreignKey: 'fyp_id',
     })
-    models.Fyp.hasMany(models.Assessment, {
-      foreignKey: 'fyp_id',
-    })
     models.Fyp.hasMany(models.Result, {
       foreignKey: 'fyp_id',
     })

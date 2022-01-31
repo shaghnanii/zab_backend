@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
     models.Pannel.hasMany(models.Group, {
       foreignKey: 'pannel_id'
     })
+
+    models.Pannel.hasMany(models.Supervisor, {
+      foreignKey: 'pannel_id'
+    })
+
   }
   return Pannel;
 };

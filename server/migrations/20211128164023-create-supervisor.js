@@ -36,6 +36,13 @@ module.exports = {
         references: { model: "Users", key: "id" },
         onDelete: 'CASCADE'
       },
+      pannel_id: {
+        type: Sequelize.INTEGER,
+        isInt: true,
+        allowNull: true,
+        references: { model: "Pannels", key: "id" },
+        onDelete: 'CASCADE'
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -29,6 +29,9 @@ module.exports = (sequelize, DataTypes) => {
     models.Group.hasMany(models.Student, {
       foreignKey: 'group_id',
     })
+    models.Group.hasMany(models.Assessment, {
+      foreignKey: 'group_id',
+    })
     models.Group.belongsTo(models.Fyp, {
       foreignKey: 'fyp_id',
     })

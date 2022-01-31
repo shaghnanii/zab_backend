@@ -20,11 +20,17 @@ module.exports = {
       level: {
         type: Sequelize.ENUM(['1', '2'])
       },
-      fyp_id: {
+      pm_id: {
         type: Sequelize.INTEGER,
         isInt: true,
         allowNull: true,
-        references: { model: "Fyps", key: "id" },
+        references: { model: "Pms", key: "id" },
+      },
+      group_id: {
+        type: Sequelize.INTEGER,
+        isInt: true,
+        allowNull: true,
+        references: { model: "Groups", key: "id" },
       },
       createdAt: {
         allowNull: false,
