@@ -191,6 +191,7 @@ router.get('/pms-part-two-attendances-and-comments', auth, check_pm, (new PmCont
 
 router.post('/pm-assessments', auth, check_pm, pm_create_assessment_validation.pm_create_assessment_request, (new AssessmentController).store)
 router.post('/pm-create-panels', auth, check_pm, pm_create_pannel_validation.pm_create_pannel_request, (new PannelController).store)
+router.get('/pm-list-panels', auth, check_pm, (new PannelController).index)
 
 // router.post('/pannels', auth, check_pm, (new PannelController).store)
 

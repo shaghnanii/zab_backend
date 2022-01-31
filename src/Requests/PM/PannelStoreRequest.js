@@ -5,6 +5,7 @@ const pm_create_pannel_request = (req, res, next) => {
     const validationRule = {
         "name": "required|string|min:4",
         "supervisors_id": "required|array",
+        "groups_id": "required|array",
     }
     const validationMessages = {
 
