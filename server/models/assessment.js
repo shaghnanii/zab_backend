@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     total_mark: DataTypes.INTEGER,
     obtained_mark: DataTypes.INTEGER,
     level: DataTypes.ENUM(['1', '2']),
-    fyp_id: DataTypes.INTEGER
+    pm_id: DataTypes.INTEGER,
+    group_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Assessment',

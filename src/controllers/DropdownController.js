@@ -11,6 +11,8 @@ class DropdownController {
             let departments = await models.Department.findAll();
             let supervisors = await models.Supervisor.findAll();
             let fyps = await models.Fyp.findAll();
+            let groups = await models.Group.findAll({where: {status: true}});
+            let pms = await models.Pm.findAll();
             let students = await models.Student.findAll(
                 {
                     where: {
@@ -29,7 +31,9 @@ class DropdownController {
                     departments: departments,
                     supervisors: supervisors,
                     fyps: fyps,
-                    students: students
+                    students: students,
+                    groups: groups,
+                    pms: pms
                 }
             })
         }

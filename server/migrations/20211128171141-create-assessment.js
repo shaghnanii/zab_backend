@@ -12,10 +12,12 @@ module.exports = {
         type: Sequelize.TEXT
       },
       total_mark: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: true,
       },
       obtained_mark: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: true,
       },
       level: {
         type: Sequelize.ENUM(['1', '2'])

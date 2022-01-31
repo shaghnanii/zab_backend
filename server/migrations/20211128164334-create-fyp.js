@@ -17,6 +17,10 @@ module.exports = {
       level: {
         type: Sequelize.ENUM(['1', '2'])
       },
+      is_available: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+      },
       desc: {
         type: Sequelize.TEXT
       },

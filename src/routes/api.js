@@ -28,6 +28,10 @@ const student_add_fyp_validation = require('../Requests/Student/Fyp/FypStoreRequ
 
 const student_create_group_validation = require('../Requests/Student/Group/GroupStoreRequest');
 
+// pm create assessment validaiton
+const pm_create_assessment_validation = require('../Requests/PM/AssessmentStoreRequest');
+const pm_create_pannel_validation = require('../Requests/PM/PannelStoreRequest');
+
 
 // controllers
 const Login = require('../controllers/Auth/LoginController')
@@ -57,6 +61,7 @@ const GroupController = require('../controllers/Student/GroupController')
 // PM Controllers
 const PmController = require('../controllers/PM/PmController')
 const PannelController = require('../controllers/PM/PannelController')
+const AssessmentController = require('../controllers/PM/AssessmentController')
 
 // Supervisor Controllers
 const SupervisorController = require('../controllers/Supervisor/SupervisorController')
@@ -156,6 +161,8 @@ router.get('/active-groups', auth, check_student, (new GroupController).active_g
 router.get('/groups/:id', auth, check_student, (new GroupController).show);
 router.post('/groups', auth, check_student, student_create_group_validation.student_create_group_request, (new GroupController).store);
 
+router.get('/assessments', auth , (new AssessmentController).index);
+
 /**
  *  -------------------------------------------------------------------------------------
  *  -------------------------------------------------------------------------------------
@@ -182,7 +189,10 @@ router.get('/pm-fyp-two', auth, check_pm, (new PmController).fyp_two)
 router.get('/pms-part-one-attendances-and-comments', auth, check_pm, (new PmController).one_comments)
 router.get('/pms-part-two-attendances-and-comments', auth, check_pm, (new PmController).two_comments)
 
-router.post('/pannels', auth, check_pm, (new PannelController).store)
+router.post('/pm-assessments', auth, check_pm, pm_create_assessment_validation.pm_create_assessment_request, (new AssessmentController).store)
+router.post('/pm-create-panels', auth, check_pm, pm_create_pannel_validation.pm_create_pannel_request, (new PannelController).store)
+
+// router.post('/pannels', auth, check_pm, (new PannelController).store)
 
 
 module.exports = router;
