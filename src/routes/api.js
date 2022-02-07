@@ -32,6 +32,10 @@ const student_create_group_validation = require('../Requests/Student/Group/Group
 const pm_create_assessment_validation = require('../Requests/PM/AssessmentStoreRequest');
 const pm_create_pannel_validation = require('../Requests/PM/PannelStoreRequest');
 
+// Supervisors validations
+const attendance_request = require('../Requests/Supervisor/AttendanceStoreRequest');
+const accept_supervision = require('../Requests/Supervisor/SupervisionStoreRequest');
+
 
 // controllers
 const Login = require('../controllers/Auth/LoginController')
@@ -65,6 +69,10 @@ const AssessmentController = require('../controllers/PM/AssessmentController')
 
 // Supervisor Controllers
 const SupervisorController = require('../controllers/Supervisor/SupervisorController')
+const FypListController = require('../controllers/Supervisor/FypListController')
+const AcceptOrRejectProposal = require('../controllers/Supervisor/AcceptOrRejectProposal')
+const AttendanceAndComment = require('../controllers/Supervisor/AttendanceAndComment')
+const MarkAttendance = require('../controllers/Supervisor/MarkAttendance')
 
 /**
  *  -------------------------------------------------------------------------------------
@@ -174,6 +182,14 @@ router.get('/assessments', auth , (new AssessmentController).index);
 router.get('/supervisors', auth, (new SupervisorController).index)
 router.get('/supervisors/:id', auth, (new SupervisorController).show)
 router.get('/supervisors', auth, check_supervisor, (new SupervisorController).show)
+
+router.get('/supervisors-fyp-listing', auth, check_supervisor, (new FypListController).index)
+
+router.get('/supervisors-attendance-comments', auth, check_supervisor, (new AttendanceAndComment).index)
+router.post('/supervisors-mark-attendance', auth, check_supervisor, attendance_request.create_attendance_request, (new AttendanceAndComment()).store)
+router.post('/supervisors-accept-or-reject-proposal', auth, check_supervisor, accept_supervision.create_accept_supervision_request, (new AcceptOrRejectProposal).store)
+router.get('/supervisors-proposal-lists', auth, check_supervisor, (new AcceptOrRejectProposal).index)
+
 
 /**
  *  -------------------------------------------------------------------------------------
