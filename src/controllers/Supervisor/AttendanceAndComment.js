@@ -15,6 +15,7 @@ class AttendanceAndComment {
                         as: 'Groups',
                         where: {
                             level: req.query.level,
+                            status: 1,
                         },
                         include: [{
                             model: models.Fyp,
