@@ -69,7 +69,9 @@ class FypController {
     }
     async delete(req, res) {
         try {
-            let fyp = await models.Fyp.findByPk(req.body.fyp_id);
+            console.log("paramsss::::::::::::::::::::::::::::::::: ", req.params.id)
+            let fyp = await models.Fyp.findByPk(req.params.fyp_id);
+            console.log("fyps::::::::::::::::::::::::::::::::: ", fyp)
             if (fyp) {
                 fyp.destroy();
                 res.json({ message: "Fyp deleted successfully." });
