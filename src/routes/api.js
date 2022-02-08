@@ -70,6 +70,7 @@ const AssessmentController = require('../controllers/PM/AssessmentController')
 // Supervisor Controllers
 const SupervisorController = require('../controllers/Supervisor/SupervisorController')
 const FypListController = require('../controllers/Supervisor/FypListController')
+const PanelShowController = require('../controllers/Supervisor/PanelShowController')
 const AcceptOrRejectProposal = require('../controllers/Supervisor/AcceptOrRejectProposal')
 const AttendanceAndComment = require('../controllers/Supervisor/AttendanceAndComment')
 const MarkAttendance = require('../controllers/Supervisor/MarkAttendance')
@@ -189,6 +190,7 @@ router.get('/supervisors-attendance-comments', auth, check_supervisor, (new Atte
 router.post('/supervisors-mark-attendance', auth, check_supervisor, attendance_request.create_attendance_request, (new AttendanceAndComment()).store)
 router.post('/supervisors-accept-or-reject-proposal', auth, check_supervisor, accept_supervision.create_accept_supervision_request, (new AcceptOrRejectProposal).store)
 router.get('/supervisors-proposal-lists', auth, check_supervisor, (new AcceptOrRejectProposal).index)
+router.get('/supervisors-show-pannels', auth, check_supervisor, (new PanelShowController).index)
 
 
 /**
