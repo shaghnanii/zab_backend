@@ -80,7 +80,7 @@ class GroupController {
 
     async store(req, res) {
         try {
-            req.body.status = 1;
+            req.body.status = 0;
             req.body.level = 1;
             let group = await models.Group.create(req.body);
             if (group) {
