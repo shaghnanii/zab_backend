@@ -22,6 +22,7 @@ module.exports = {
         isInt: true,
         allowNull: true,
         references: { model: "Fyps", key: "id" },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

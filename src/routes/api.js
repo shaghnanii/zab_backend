@@ -136,6 +136,7 @@ router.delete('/admin/pms/:id', auth, check_admin, (new AdminPmController).delet
 
 
 router.get('/admin/fyps', auth, check_admin, (new AdminFypController).index);
+router.post('/delete-fyp', auth, check_admin, (new AdminFypController).delete);
 router.get('/admin/fyps/:id', auth, check_admin, (new AdminFypController).show);
 router.post('/admin/fyps', auth, check_admin, admin_add_new_fyp_validation.admin_add_fyp, (new AdminFypController).store);
 router.put('/admin/fyps/:id', auth, check_admin, admin_add_new_fyp_validation.admin_add_fyp, (new AdminFypController).update);
