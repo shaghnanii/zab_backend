@@ -23,7 +23,13 @@ class PanelShowController {
                                 },
                                 {
                                     model: models.Student,
+                                    include: {
+                                        model: models.User,
+                                    }
                                 },
+                                {
+                                    model: models.Assessment
+                                }
                             ]
                         }
                     }

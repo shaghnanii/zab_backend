@@ -5,7 +5,7 @@ const pm_create_assessment_request = (req, res, next) => {
     const validationRule = {
         "question": "required|string|min:20",
         "total_mark": "required",
-        "obtained_mark": "required",
+        // "obtained_mark": "required",
         "group_id": "required|numeric",
         // "supervisor_id": "required|numeric"
     }
